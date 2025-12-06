@@ -1,3 +1,4 @@
+import os
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
@@ -6,12 +7,12 @@ from collections import defaultdict, OrderedDict
 URL = "https://www.sivola.it/viaggi/giappone-tokyo-kyoto-osaka"
 
 # Token del tuo bot fornito da BotFather
-TOKEN = 'CHANNEL_TOKEN_HERE'
+TOKEN = os.environ[" "]
 
 # ID del canale dove il bot invierà i messaggi
-CHANNEL_ID = 'CHANNEL_ID_HERE'
+CHANNEL_ID = os.environ["CHANNEL_ID"]
 
-TARGET_MONTH = 'August'
+TARGET_MONTH = 'June'
 
 def send_message(message):
     # print("Sto mandando " + message)
