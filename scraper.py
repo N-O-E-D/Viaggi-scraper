@@ -1,6 +1,7 @@
 import os
 import requests
 from bs4 import BeautifulSoup
+import sys
 from datetime import datetime
 from collections import defaultdict, OrderedDict
 
@@ -12,7 +13,7 @@ TOKEN = os.environ["CHANNEL_TOKEN"]
 # ID del canale dove il bot invierà i messaggi
 CHANNEL_ID = os.environ["CHANNEL_ID"]
 
-TARGET_MONTH = 'June'
+TARGET_MONTH = sys.argv[1]
 
 def send_message(message):
     # print("Sto mandando " + message)

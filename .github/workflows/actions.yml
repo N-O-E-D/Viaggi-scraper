@@ -7,12 +7,9 @@ on:
     inputs:
       month:
         description: 'Month to search for'
-        required: false
+        required: true
         default: 'August'
-        type: choice
-        options:
-        - August
-        - June
+        type: string
 
 jobs:
   build:
@@ -36,4 +33,4 @@ jobs:
         env:
           CHANNEL_TOKEN: ${{ secrets.CHANNEL_TOKEN }}
           CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
-        run: python scraper.py
+        run: python scraper.py "{{ github.event.inputs.month }}"
