@@ -7,7 +7,7 @@ from collections import defaultdict, OrderedDict
 URL = "https://www.sivola.it/viaggi/giappone-tokyo-kyoto-osaka"
 
 # Token del tuo bot fornito da BotFather
-TOKEN = os.environ[" "]
+TOKEN = os.environ["CHANNEL_TOKEN"]
 
 # ID del canale dove il bot invierà i messaggi
 CHANNEL_ID = os.environ["CHANNEL_ID"]
