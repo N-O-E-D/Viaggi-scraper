@@ -81,6 +81,7 @@ if __name__ == "__main__":
             print(f"  - {v['data_iso']} | {v['durata']} | {v['partenza']} | {stato}")
         print()
     
+    print(f"Ricerca per {TARGET_MONTH}")
      # Cerca il mese target in schema
     for mese, viaggi in schema.items():
         if TARGET_MONTH in mese:
