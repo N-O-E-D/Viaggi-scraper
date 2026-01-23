@@ -14,6 +14,15 @@ TOKEN = os.environ["CHANNEL_TOKEN"]
 CHANNEL_ID = os.environ["CHANNEL_ID"]
 
 TARGET_MONTH = sys.argv[1]
+KNOWN_DATES = {
+    "2026-08-05",
+    "2026-08-06",
+    "2026-08-10",
+    "2026-08-19",
+    "2026-08-21",
+    "2026-08-23",
+    "2026-08-28"
+}
 
 def send_message(message):
     # print("Sto mandando " + message)
@@ -85,9 +94,19 @@ if __name__ == "__main__":
      # Cerca il mese target in schema
     for mese, viaggi in schema.items():
         if TARGET_MONTH in mese:
-            # Costruzione del messaggio
-            righe = [f"📅 Viaggi trovati per <b>{mese}</b>:\n"]
-            for v in viaggi:
+            # Prendo solo le date nuove
+            nuovi_viaggi = [
+                v for v in viaggi
+                if v["data_iso"] not in KNOWN_DATES
+            ]
+
+            if not nuovi_viaggi:
+                print("Nessuna nuova data trovata. Nessun messaggio inviato.")
+                break
+
+            righe = [f"🆕 <b>Nuove date trovate per {mese}</b>:\n"]
+
+            for v in nuovi_viaggi:
                 icona = "❌ Sold out" if v["soldout"] else "🟢 Disponibile"
                 righe.append(
                     f"- <b>{v['data_iso']}</b> | {v['durata']} | {v['partenza']} | {icona}"
@@ -98,5 +117,6 @@ if __name__ == "__main__":
             print("Invio messaggio Telegram...")
             send_message(messaggio)
             break
+
     else:
         print("Nessun viaggio trovato per il mese target. Nessun messaggio inviato.")
